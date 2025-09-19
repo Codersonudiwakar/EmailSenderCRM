@@ -1,35 +1,26 @@
-package com.BulkMailSender.app.model;
+package com.BulkMailSender.app.dto;
 
 import java.time.Instant;
 
-import com.BulkMailSender.app.enumdata.CampaignStatus;
 import com.BulkMailSender.app.enumdata.EmailStatus;
-import com.BulkMailSender.app.uam.User;
+import com.BulkMailSender.app.model.Campaign;
+import com.BulkMailSender.app.model.Recipient;
+import com.BulkMailSender.app.model.Template;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "email_logs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailLog {
-	@Id
-	@GeneratedValue
+public class EmailLogDTO {
 	private Long id;
-	@ManyToOne
-	private Campaign campaign;
-	@ManyToOne
-	private Recipient recipient;
-	@ManyToOne
-	private Template template;
-	@Enumerated(EnumType.STRING)
+	private Long campaignId;
+	private Long recipientId;
+	private Long templateId;
 	private EmailStatus status;
 	private String providerMessageId;
-	@Column(columnDefinition = "jsonb")
 	private String providerResponse;
 	private Integer attempts;
 	private Instant lastAttemptAt;
@@ -41,4 +32,5 @@ public class EmailLog {
 	private Instant bouncedAt;
 	private String failureReason;
 	private Instant createdAt;
+
 }

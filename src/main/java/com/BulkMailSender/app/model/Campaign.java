@@ -6,9 +6,15 @@ import com.BulkMailSender.app.enumdata.CampaignStatus;
 import com.BulkMailSender.app.uam.User;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="campaigns")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Campaign {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY) 

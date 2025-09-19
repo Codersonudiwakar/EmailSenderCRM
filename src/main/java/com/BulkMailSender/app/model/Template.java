@@ -2,12 +2,19 @@ package com.BulkMailSender.app.model;
 
 import java.time.Instant;
 
+import com.BulkMailSender.app.enumdata.CampaignStatus;
 import com.BulkMailSender.app.uam.User;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "templates")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Template {
 	@Id
 	@GeneratedValue
