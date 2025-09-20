@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.BulkMailSender.app.Repository.CampaignRepository;
 import com.BulkMailSender.app.Service.CampaignService;
 import com.BulkMailSender.app.dto.CampaignDTO;
@@ -11,6 +13,10 @@ import com.BulkMailSender.app.enumdata.CampaignStatus;
 import com.BulkMailSender.app.model.Campaign;
 import com.BulkMailSender.app.uam.CRMUserRepository;
 
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
 public class CampaignServiceImpl implements CampaignService{
 	
 	
@@ -114,6 +120,12 @@ public class CampaignServiceImpl implements CampaignService{
 	        c.setStatus(status);
 	        c.setUpdatedAt(Instant.now());
 	        return toDTO(campaignRepository.save(c));
+	}
+
+	@Override
+	public List<CampaignDTO> getAllCampaignsbyUser(Long id) {
+		
+		return campaignRepository.findByCreatedBy(id).stream().map(this::toDTO).collect(Collectors.toList());
 	}
 
 }

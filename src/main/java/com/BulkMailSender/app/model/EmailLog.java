@@ -18,18 +18,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmailLog {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@ManyToOne
+	@JoinColumn(name = "campaign_id", nullable = false)
 	private Campaign campaign;
+
 	@ManyToOne
+	@JoinColumn(name = "recipient_id", nullable = false)
 	private Recipient recipient;
+
 	@ManyToOne
+	@JoinColumn(name = "template_id", nullable = false)
 	private Template template;
 	@Enumerated(EnumType.STRING)
 	private EmailStatus status;
 	private String providerMessageId;
-	@Column(columnDefinition = "jsonb")
+	@Column(columnDefinition = "JSON")
 	private String providerResponse;
 	private Integer attempts;
 	private Instant lastAttemptAt;

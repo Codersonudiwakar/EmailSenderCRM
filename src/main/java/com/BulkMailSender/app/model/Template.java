@@ -25,9 +25,11 @@ public class Template {
 	private String bodyHtml;
 	@Column(columnDefinition = "TEXT")
 	private String bodyText;
-	@Column(columnDefinition = "jsonb")
-	private String variables;
-	@ManyToOne
-	private User createdBy;
+	@Column(columnDefinition = "JSON")
+    private String variables;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_id", nullable = false)
+    private User createdBy;
 	private Instant createdAt;
 }

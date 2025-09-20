@@ -13,6 +13,7 @@ public interface CampaignService {
     void deleteCampaign(Long id);
     CampaignDTO getCampaignById(Long id);
     List<CampaignDTO> getAllCampaigns();
+    List<CampaignDTO> getAllCampaignsbyUser(Long id);
     CampaignDTO scheduleCampaign(Long id, Instant scheduleTime);
     CampaignDTO updateStatus(Long id, CampaignStatus status);
 }

@@ -18,9 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImportJob {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@ManyToOne
+	@JoinColumn(name = "campaign_id", nullable = false)
 	private Campaign campaign;
 	@Enumerated(EnumType.STRING)
 	private ImportSource source;
@@ -29,7 +31,7 @@ public class ImportJob {
 	private Integer totalRows;
 	private Integer successCount;
 	private Integer failureCount;
-	@Column(columnDefinition = "jsonb")
+	@Column(columnDefinition = "JSON")
 	private String errors;
 	private String status;
 	private Instant createdAt;

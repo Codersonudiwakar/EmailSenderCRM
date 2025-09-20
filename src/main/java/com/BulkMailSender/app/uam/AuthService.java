@@ -39,11 +39,15 @@ public class AuthService {
              .email(request.getEmail())
              .password(passwordEncoder.encode(request.getPassword()))
              .role(request.getRole() != null ? request.getRole() : Role.USER)
+             .enabled(true)
+             .accountNonExpired(true)
+             .accountNonLocked(true)
+             .credentialsNonExpired(true)
              .build();
      
      userRepository.save(user);
      
-     String jwtToken = jwtUtil.generateToken(user);
+     String jwtToken = jwtUtil.generateToken(user.getId(),user);
      
      return AuthResponse.builder()
              .token(jwtToken)
@@ -82,7 +86,7 @@ public class AuthService {
 	        user.setLastLogin(LocalDateTime.now());
 	        userRepository.save(user);
 	        
-	        String jwtToken = jwtUtil.generateToken(user);
+	        String jwtToken = jwtUtil.generateToken(user.getId(),user);
 	        
 	        return AuthResponse.builder()
 	                .token(jwtToken)
